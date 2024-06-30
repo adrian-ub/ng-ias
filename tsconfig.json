@@ -14,8 +14,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@config/*": ["src/config/*"],
+      "@domain/*": ["src/domain/*"],
+      "@infraestructure/*": ["src/infraestructure/*"],
+      "@ui/*": ["src/ui/*"]
     },
     "useDefineForClassFields": false,
     "esModuleInterop": true,
