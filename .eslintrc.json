@@ -26,11 +26,12 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@angular-eslint/no-host-metadata-property": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "",
             "style": "camelCase"
           }
         ],
@@ -38,7 +39,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "",
             "style": "kebab-case"
           }
         ]

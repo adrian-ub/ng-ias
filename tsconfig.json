@@ -14,7 +14,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["src/app/*"]
+      "@app/*": ["src/app/*"],
+      "@components/*": ["src/components/*"]
     },
     "useDefineForClassFields": false,
     "esModuleInterop": true,
