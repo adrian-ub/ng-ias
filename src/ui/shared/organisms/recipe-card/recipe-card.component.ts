@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import { HlmCardDirective, HlmCardContentDirective } from '@components/card';
 import { HlmButtonDirective } from '@components/button';
@@ -23,4 +23,5 @@ import { heroHeartSolid } from '@ng-icons/heroicons/solid';
 })
 export class RecipeCardComponent {
   recipe = input.required<RecipeModel>();
+  markFavorite = output<RecipeModel>();
 }

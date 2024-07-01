@@ -21,6 +21,6 @@ export const handlers = [
 
     const recipes = await Promise.all(recipesPromise);
 
-    return HttpResponse.json(recipes);
+    return HttpResponse.json({ data: recipes });
   }),
 ];

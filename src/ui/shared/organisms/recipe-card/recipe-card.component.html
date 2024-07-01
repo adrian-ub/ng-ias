@@ -33,7 +33,12 @@
       >
         Ver receta
       </button>
-      <button hlmBtn size="sm" variant="ghost">
+      <button
+        hlmBtn
+        size="sm"
+        variant="ghost"
+        (click)="markFavorite.emit(recipe())"
+      >
         <hlm-icon
           name="heroHeartSolid"
           size="base"

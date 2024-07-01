@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
+
 import { CategoryModel } from '@domain/models/category/category.model';
 import { RecipeModel } from '@domain/models/recipe/recipe.model';
+import { RecipeUsecase } from '@domain/usecase/recipe.usecase';
 import { CategoriesListComponent } from '@ui/shared/organisms/categories-list/categories-list.component';
 import { RecipeCardComponent } from '@ui/shared/organisms/recipe-card/recipe-card.component';
 
@@ -11,8 +12,8 @@ import { RecipeCardComponent } from '@ui/shared/organisms/recipe-card/recipe-car
   templateUrl: 'recipe-list.component.html',
   imports: [RecipeCardComponent, CategoriesListComponent],
 })
-export class RecipeListComponent {
-  private readonly http = inject(HttpClient);
+export class RecipeListComponent implements OnInit {
+  private readonly recipeUseCase = inject(RecipeUsecase);
   recipes = signal<RecipeModel[]>([]);
   categories = computed(() => {
     const uniqueCategories = new Map<string, RecipeModel>();
@@ -35,7 +36,9 @@ export class RecipeListComponent {
       (recipe) => recipe.category.id === this.selectedCategory()?.id
     );
   });
-  constructor() {
-    this.http.get<RecipeModel[]>('/recipes').subscribe(this.recipes.set);
+
+  async ngOnInit() {
+    const recipes = await this.recipeUseCase.getRecipes();
+    this.recipes.set(recipes);
   }
 }
