@@ -1,7 +1,13 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { toast } from 'ngx-sonner';
 import { HlmToasterComponent } from '@components/sonner';
-import { CategoryModel } from '@domain/models/category/category.model';
 import { RecipeModel } from '@domain/models/recipe/recipe.model';
 import { RecipeUsecase } from '@domain/usecase/recipe.usecase';
 import { CategoriesListComponent } from '@ui/shared/organisms/categories-list/categories-list.component';
@@ -15,6 +21,9 @@ import { RecipeCardComponent } from '@ui/shared/organisms/recipe-card/recipe-car
 })
 export class RecipeListComponent implements OnInit {
   private readonly recipeUseCase = inject(RecipeUsecase);
+  selectedCategory = input<string | undefined>(undefined, {
+    alias: 'c',
+  });
   recipes = signal<RecipeModel[]>([]);
   categories = computed(() => {
     const uniqueCategories = new Map<string, RecipeModel>();
@@ -28,13 +37,12 @@ export class RecipeListComponent implements OnInit {
     );
   });
 
-  selectedCategory = signal<CategoryModel | null>(null);
   selectedRecipes = computed(() => {
     return this.recipes().filter((recipe) => {
-      if (this.selectedCategory() === null) {
+      if (!this.selectedCategory()) {
         return true;
       }
-      return this.selectedCategory()?.id === recipe.category.id;
+      return this.selectedCategory() === recipe.category.id.toString();
     });
   });
 
@@ -52,8 +60,9 @@ export class RecipeListComponent implements OnInit {
       {
         action: {
           label: 'Deshacer',
-          onClick: () =>
-            this.markFavorite({ ...recipe, isFavorite: !recipe.isFavorite }),
+          onClick: () => {
+            this.markFavorite({ ...recipe, isFavorite: !recipe.isFavorite });
+          },
         },
       }
     );

@@ -1,7 +1,4 @@
-<app-categories-list
-  [categories]="categories()"
-  (selectCategory)="selectedCategory.set($event)"
-/>
+<app-categories-list [categories]="categories()" />
 
 <section class="grid grid-cols-4 gap-4">
   @for (recipe of selectedRecipes(); track $index) {
