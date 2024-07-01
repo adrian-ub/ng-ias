@@ -9,7 +9,7 @@ import {
   untracked,
 } from '@angular/core';
 import { lucideArrowLeft } from '@ng-icons/lucide';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmButtonDirective } from '@components/button';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent, provideIcons } from '@components/icon';
 import type { ClassValue } from 'clsx';

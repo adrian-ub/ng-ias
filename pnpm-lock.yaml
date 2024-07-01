@@ -35,6 +35,9 @@ dependencies:
   '@ng-icons/core':
     specifier: ^25.1.0
     version: 25.6.1
+  '@ng-icons/heroicons':
+    specifier: ^28.1.0
+    version: 28.1.0
   '@ng-icons/lucide':
     specifier: ^26.3.0
     version: 26.5.0
@@ -113,6 +116,9 @@ dependencies:
   clsx:
     specifier: ^1.2.1
     version: 1.2.1
+  dexie:
+    specifier: ^4.0.7
+    version: 4.0.7
   embla-carousel-angular:
     specifier: ^14.0.0
     version: 14.1.1(@angular/common@17.3.11)(@angular/core@17.3.11)
@@ -3914,6 +3920,12 @@ packages:
       tslib: 2.6.3
     dev: false
 
+  /@ng-icons/heroicons@28.1.0:
+    resolution: {integrity: sha512-HBQTRZTpJ1MmNLXAX5E3FgvSnCSrzgmS2Kb1SBaXgOkEWqkwjmZZZiS/vFc7ns5T8gq8NdVGeYYQGOhD4HRiqA==}
+    dependencies:
+      tslib: 2.6.3
+    dev: false
+
   /@ng-icons/lucide@26.5.0:
     resolution: {integrity: sha512-rW6iZo2LBlFvnpBLWs400mrKn/34PKt5R+Yfd6ZJz9lxq2TMJfNeJv/V4ylG9vYG3RkPa+KEJ+Q6/8IOceT0NA==}
     dependencies:
@@ -7424,6 +7436,10 @@ packages:
       debug: 4.3.5
     transitivePeerDependencies:
       - supports-color
+
+  /dexie@4.0.7:
+    resolution: {integrity: sha512-M+Lo6rk4pekIfrc2T0o2tvVJwL6EAAM/B78DNfb8aaxFVoI1f8/rz5KTxuAnApkwqTSuxx7T5t0RKH7qprapGg==}
+    dev: false
 
   /didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
