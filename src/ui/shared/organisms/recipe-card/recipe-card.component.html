@@ -42,11 +42,8 @@
         <hlm-icon
           name="heroHeartSolid"
           size="base"
-          [class]="{
-            'stroke-secondary-foreground': !recipe().isFavorite,
-            'text-transparent': !recipe().isFavorite,
-            'text-red-500': recipe().isFavorite
-          }"
+          [class.text-red-500]="recipe().isFavorite"
+          [class.stroke-secondary-foreground]="!recipe().isFavorite"
         />
       </button>
     </div>

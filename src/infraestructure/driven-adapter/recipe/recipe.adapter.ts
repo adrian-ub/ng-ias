@@ -23,7 +23,7 @@ export class RecipeAdapter implements RecipeGateway {
       .pipe(map(RecipeMapper.transformGetRecipestoRecipes));
   }
 
-  markFavorite(id: string): Observable<RecipeModel[]> {
+  markFavorite(id: number): Observable<RecipeModel[]> {
     return this.httpClient
       .post<{ data: RecipeModel[] }>('/recipes/add-fovorite', {
         id,

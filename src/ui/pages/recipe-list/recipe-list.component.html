@@ -5,6 +5,7 @@
 
 <section class="grid grid-cols-4 gap-4">
   @for (recipe of selectedRecipes(); track $index) {
-  <app-recipe-card [recipe]="recipe" />
+  <app-recipe-card [recipe]="recipe" (markFavorite)="markFavorite($event)" />
   }
 </section>
+<hlm-toaster />

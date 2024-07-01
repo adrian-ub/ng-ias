@@ -1,4 +1,4 @@
-import { HttpResponse, http } from 'msw';
+import { HttpResponse, PathParams, http } from 'msw';
 import { db } from './db';
 
 export const handlers = [
@@ -23,4 +23,15 @@ export const handlers = [
 
     return HttpResponse.json({ data: recipes });
   }),
+  http.post<PathParams, { id: number }>(
+    '/recipes/add-fovorite',
+    async ({ request }) => {
+      const body = await request.json();
+      const recipe = await db.recipes.where({ id: body.id }).first();
+      await db.recipes.update(body.id, {
+        isFavorite: !recipe?.isFavorite,
+      });
+      return HttpResponse.json({ data: 'ok' });
+    }
+  ),
 ];

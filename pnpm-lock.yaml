@@ -126,8 +126,8 @@ dependencies:
     specifier: ^13.0.1
     version: 13.0.3(@angular/cdk@17.3.10)(@angular/common@17.3.11)(@angular/core@17.3.11)(rxjs@7.8.1)
   ngx-sonner:
-    specifier: ^2.0.0
-    version: 2.0.1(@angular/common@17.3.11)(@angular/core@17.3.11)
+    specifier: ^1.0.0
+    version: 1.0.0(@angular/common@17.3.11)(@angular/core@17.3.11)
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
@@ -10016,11 +10016,11 @@ packages:
       tslib: 2.6.3
     dev: false
 
-  /ngx-sonner@2.0.1(@angular/common@17.3.11)(@angular/core@17.3.11):
-    resolution: {integrity: sha512-+z0mc+go1eznziDNBziXy1H8Emsd8HisofC29FW+dEheZzDqfpF8sS0Oe0ZuIXWRGkK/8sk63WrTXIEG1dYEjA==}
+  /ngx-sonner@1.0.0(@angular/common@17.3.11)(@angular/core@17.3.11):
+    resolution: {integrity: sha512-eymqTMVGrQAm0R9b+/koA+cymyTmE86q0giZI611apEwH3MDdIB6wEDwqc4DPSQ+AQJlgBz4vJxTFCOY+lXCzQ==}
     peerDependencies:
-      '@angular/common': '>=18.0.0'
-      '@angular/core': '>=18.0.0'
+      '@angular/common': '>=17.3.0'
+      '@angular/core': '>=17.3.0'
     dependencies:
       '@angular/common': 17.3.11(@angular/core@17.3.11)(rxjs@7.8.1)
       '@angular/core': 17.3.11(rxjs@7.8.1)(zone.js@0.14.7)

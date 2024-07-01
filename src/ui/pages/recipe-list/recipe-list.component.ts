@@ -1,5 +1,6 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-
+import { toast } from 'ngx-sonner';
+import { HlmToasterComponent } from '@components/sonner';
 import { CategoryModel } from '@domain/models/category/category.model';
 import { RecipeModel } from '@domain/models/recipe/recipe.model';
 import { RecipeUsecase } from '@domain/usecase/recipe.usecase';
@@ -10,7 +11,7 @@ import { RecipeCardComponent } from '@ui/shared/organisms/recipe-card/recipe-car
   standalone: true,
   selector: 'app-recipe-list',
   templateUrl: 'recipe-list.component.html',
-  imports: [RecipeCardComponent, CategoriesListComponent],
+  imports: [RecipeCardComponent, CategoriesListComponent, HlmToasterComponent],
 })
 export class RecipeListComponent implements OnInit {
   private readonly recipeUseCase = inject(RecipeUsecase);
@@ -29,16 +30,32 @@ export class RecipeListComponent implements OnInit {
 
   selectedCategory = signal<CategoryModel | null>(null);
   selectedRecipes = computed(() => {
-    if (!this.selectedCategory()) {
-      return this.recipes();
-    }
-    return this.recipes().filter(
-      (recipe) => recipe.category.id === this.selectedCategory()?.id
-    );
+    return this.recipes().filter((recipe) => {
+      if (this.selectedCategory() === null) {
+        return true;
+      }
+      return this.selectedCategory()?.id === recipe.category.id;
+    });
   });
 
   async ngOnInit() {
     const recipes = await this.recipeUseCase.getRecipes();
     this.recipes.set(recipes);
+  }
+
+  async markFavorite(recipe: RecipeModel) {
+    await this.recipeUseCase.markFavorite(recipe.id);
+    const recipes = await this.recipeUseCase.getRecipes();
+    this.recipes.set(recipes);
+    toast(
+      `Receta ${!recipe.isFavorite ? 'marcada' : 'quitada'} como favorita`,
+      {
+        action: {
+          label: 'Deshacer',
+          onClick: () =>
+            this.markFavorite({ ...recipe, isFavorite: !recipe.isFavorite }),
+        },
+      }
+    );
   }
 }
