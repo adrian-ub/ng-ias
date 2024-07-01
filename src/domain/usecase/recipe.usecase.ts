@@ -9,7 +9,12 @@ import { lastValueFrom } from 'rxjs';
 export class RecipeUsecase {
   private readonly recipeGateway = inject(RecipeGateway);
 
-  addRecipe(data: Omit<RecipeModel, 'id'>) {
+  addRecipe(
+    data: Omit<RecipeModel, 'id' | 'category' | 'ingredients'> & {
+      categoryId: string;
+      ingredients: { ingredientId: string; amount: string }[];
+    }
+  ) {
     return lastValueFrom(this.recipeGateway.addRecipe(data));
   }
 

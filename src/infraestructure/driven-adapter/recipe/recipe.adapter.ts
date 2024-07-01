@@ -13,7 +13,12 @@ import { RecipeMapper } from './mappers/recipe.mapper';
 export class RecipeAdapter implements RecipeGateway {
   private readonly httpClient = inject(HttpClient);
 
-  addRecipe(data: RecipeModel): Observable<{ data: RecipeModel[] }> {
+  addRecipe(
+    data: Omit<RecipeModel, 'id' | 'category' | 'ingredients'> & {
+      categoryId: string;
+      ingredients: { ingredientId: string; amount: string }[];
+    }
+  ): Observable<{ data: RecipeModel[] }> {
     return this.httpClient.post<{ data: RecipeModel[] }>('/recipes', data);
   }
 

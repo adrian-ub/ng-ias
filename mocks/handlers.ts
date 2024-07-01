@@ -1,5 +1,6 @@
 import { HttpResponse, PathParams, http } from 'msw';
 import { db } from './db';
+import { RecipeModel } from '@domain/models/recipe/recipe.model';
 
 export const handlers = [
   http.get('/recipes', async () => {
@@ -23,6 +24,29 @@ export const handlers = [
 
     return HttpResponse.json({ data: recipes });
   }),
+  http.post<
+    PathParams,
+    Omit<RecipeModel, 'id' | 'category' | 'ingredients'> & {
+      categoryId: string;
+      ingredients: { ingredientId: string; amount: string }[];
+    }
+  >('/recipes', async ({ request }) => {
+    const body = await request.json();
+    const { categoryId, ingredients, ...recipe } = body;
+    const recipeId = await db.recipes.add({
+      ...recipe,
+      id: undefined as unknown as number,
+      categoryId: parseInt(categoryId, 10),
+      ingredients: ingredients.map(({ ingredientId, amount }) => ({
+        ingredientId: parseInt(ingredientId, 10),
+        amount,
+      })),
+    });
+
+    const newRecipe = await db.recipes.get(recipeId);
+
+    return HttpResponse.json({ data: newRecipe });
+  }),
   http.post<PathParams, { id: number }>(
     '/recipes/add-fovorite',
     async ({ request }) => {
@@ -34,4 +58,12 @@ export const handlers = [
       return HttpResponse.json({ data: 'ok' });
     }
   ),
+  http.get('/categories', async () => {
+    const categories = await db.categories.toArray();
+    return HttpResponse.json({ data: categories });
+  }),
+  http.get('/ingredients', async () => {
+    const ingredients = await db.ingredients.toArray();
+    return HttpResponse.json({ data: ingredients });
+  }),
 ];

@@ -5,11 +5,13 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { provideRecipe } from '@infraestructure/driven-adapter/recipe';
+import { provideIngredient } from '@infraestructure/driven-adapter/ingredient';
+import { provideCategory } from '@infraestructure/driven-adapter/category';
 
 import { appRoutes } from './app.routes';
-import { APP_BASE_HREF } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +23,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(),
     provideRecipe(),
+    provideIngredient(),
+    provideCategory(),
   ],
 };

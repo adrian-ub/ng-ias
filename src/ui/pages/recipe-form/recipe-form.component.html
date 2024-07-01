@@ -1,1 +1,169 @@
-recipe form works!
+<form
+  class="flex flex-col items-end space-y-6"
+  [formGroup]="form"
+  (submit)="createRecipe($event)"
+>
+  <div class="flex flex-row w-full space-x-2">
+    <div hlmLabel class="basis-1/2">
+      Categoría
+      <brn-select placeholder="Categoría" formControlName="categoryId">
+        <hlm-select-trigger class="w-full my-1">
+          <hlm-select-value />
+        </hlm-select-trigger>
+        <hlm-select-content>
+          @for (category of categories(); track $index) {
+          <hlm-option [value]="category.id">{{ category.name }}</hlm-option>
+          }
+        </hlm-select-content>
+      </brn-select>
+
+      <strong *ngxControlError="form.controls.categoryId; track: 'required'">
+        Categoría es requerida.
+      </strong>
+    </div>
+
+    <label hlmLabel class="basis-1/2">
+      Título
+      <input
+        class="mt-1.5 w-full"
+        placeholder="Pizza"
+        hlmInput
+        autocomplete="off"
+        name="title"
+        formControlName="title"
+      />
+
+      <strong *ngxControlError="form.controls.title; track: 'required'">
+        Título es requerido.
+      </strong>
+    </label>
+  </div>
+
+  <div class="flex flex-row w-full space-x-2">
+    <label hlmLabel class="basis-1/2">
+      Tiempo de preparación
+      <input
+        class="mt-1.5 w-full"
+        placeholder="30"
+        hlmInput
+        autocomplete="off"
+        name="time"
+        formControlName="time"
+        type="number"
+      />
+
+      <strong *ngxControlError="form.controls.time; track: 'required'">
+        Tiempo de preparación es requerido.
+      </strong>
+    </label>
+
+    <label hlmLabel class="basis-1/2">
+      Imagen de presentación
+      <input
+        class="mt-1.5 w-full"
+        placeholder="https://example.com/image.jpg"
+        hlmInput
+        autocomplete="off"
+        name="photoUrl"
+        formControlName="photoUrl"
+      />
+
+      <strong *ngxControlError="form.controls.photoUrl; track: 'required'">
+        Imagen de presentación es requerida.
+      </strong>
+      <strong *ngxControlError="form.controls.photoUrl; track: 'invalidUrl'">
+        Url inválida.
+      </strong>
+    </label>
+  </div>
+
+  <div
+    class="border-border overflow-hidden rounded-lg border p-2 sm:p-4 pb-16 w-full flex flex-col items-end gap-6"
+  >
+    <ng-container formArrayName="ingredients">
+      @for (ingredientControl of form.controls.ingredients.controls; track
+      $index) {
+      <div
+        class="w-full flex flex-row space-x-2 items-center"
+        [formGroup]="ingredientControl"
+      >
+        <div hlmLabel class="basis-1/2">
+          Ingrediente
+          <brn-select placeholder="Ingrediente" formControlName="ingredientId">
+            <hlm-select-trigger class="w-full my-1">
+              <hlm-select-value />
+            </hlm-select-trigger>
+            <hlm-select-content>
+              @for (ingredient of ingredients(); track $index) {
+              <hlm-option [value]="ingredient.id">
+                {{ ingredient.name }}
+              </hlm-option>
+              }
+            </hlm-select-content>
+          </brn-select>
+
+          <strong
+            *ngxControlError="
+              ingredientControl.controls.ingredientId;
+              track: 'required'
+            "
+          >
+            Ingrediente es requerido.
+          </strong>
+        </div>
+
+        <label hlmLabel class="basis-1/2">
+          Cantidad
+          <input
+            class="mt-1.5 w-full"
+            placeholder="50 ml"
+            hlmInput
+            autocomplete="off"
+            name="amount"
+            formControlName="amount"
+          />
+
+          <strong
+            *ngxControlError="
+              ingredientControl.controls.amount;
+              track: 'required'
+            "
+          >
+            Cantidad es requerida.
+          </strong>
+        </label>
+
+        <div hlmLabel>
+          <span class="text-transparent">a</span>
+          <button hlmBtn variant="ghost" (click)="deleteIngredient($index)">
+            <hlm-icon name="lucideTrash" />
+          </button>
+        </div>
+      </div>
+      }
+    </ng-container>
+
+    <button hlmBtn (click)="newIngredient()">Agregar ingrediente</button>
+  </div>
+
+  <label hlmLabel class="w-full">
+    Preparación
+    <textarea
+      class="mt-1.5 h-fit w-full"
+      placeholder="2x eggs, 1x milk,..."
+      hlmInput
+      autocomplete="off"
+      name="description"
+      formControlName="description"
+      rows="4"
+    ></textarea>
+
+    <strong *ngxControlError="form.controls.description; track: 'required'">
+      Preparación es requerida.
+    </strong>
+  </label>
+
+  <button hlmBtn variant="secondary" type="submit">Crear Receta</button>
+</form>
+
+<hlm-toaster richColors />
