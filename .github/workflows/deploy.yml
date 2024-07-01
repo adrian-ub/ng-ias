@@ -36,7 +36,7 @@ jobs:
           path: |
             node_modules
           key: npm-dependencies-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm nx build --base-href=ng-ias
+      - run: pnpm nx build
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
