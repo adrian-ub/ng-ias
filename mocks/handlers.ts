@@ -24,6 +24,35 @@ export const handlers = [
 
     return HttpResponse.json({ data: recipes });
   }),
+  http.get<{ id: string }>('/recipes/:id', async ({ params }) => {
+    const recipe = await db.recipes.get(parseInt(params.id, 10));
+    if (!recipe) {
+      return HttpResponse.json(
+        {
+          data: { message: 'Recipe not found' },
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    const { categoryId, ...rest } = recipe;
+    return HttpResponse.json({
+      data: {
+        ...rest,
+        category: await db.categories.get(categoryId),
+        ingredients: await Promise.all(
+          rest.ingredients.map(async ({ amount, ingredientId }) => {
+            return {
+              amount,
+              ingredient: await db.ingredients.get(ingredientId),
+            };
+          })
+        ),
+      },
+    });
+  }),
   http.post<
     PathParams,
     Omit<RecipeModel, 'id' | 'category' | 'ingredients'> & {

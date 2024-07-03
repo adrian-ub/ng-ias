@@ -25,4 +25,8 @@ export class RecipeUsecase {
   markFavorite(id: number) {
     return lastValueFrom(this.recipeGateway.markFavorite(id));
   }
+
+  getRecipe(id: number) {
+    return lastValueFrom(this.recipeGateway.getRecipe(id));
+  }
 }

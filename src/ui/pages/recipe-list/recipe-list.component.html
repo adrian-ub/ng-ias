@@ -1,8 +1,11 @@
-<app-categories-list [categories]="categories()" />
+<div class="container">
+  <app-categories-list [categories]="categories()" />
 
-<section class="grid grid-cols-4 gap-4">
-  @for (recipe of selectedRecipes(); track $index) {
-  <app-recipe-card [recipe]="recipe" (markFavorite)="markFavorite($event)" />
-  }
-</section>
+  <section class="grid grid-cols-4 gap-4">
+    @for (recipe of selectedRecipes(); track $index) {
+    <app-recipe-card [recipe]="recipe" (markFavorite)="markFavorite($event)" />
+    }
+  </section>
+</div>
+
 <hlm-toaster />

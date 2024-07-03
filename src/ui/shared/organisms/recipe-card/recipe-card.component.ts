@@ -7,6 +7,7 @@ import { HlmButtonDirective } from '@components/button';
 import { RecipeModel } from '@domain/models/recipe/recipe.model';
 import { HlmIconComponent, provideIcons } from '@components/icon';
 import { heroHeartSolid } from '@ng-icons/heroicons/solid';
+import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -19,6 +20,7 @@ import { heroHeartSolid } from '@ng-icons/heroicons/solid';
     HlmButtonDirective,
     HlmIconComponent,
     SlicePipe,
+    RouterLink,
   ],
 })
 export class RecipeCardComponent {

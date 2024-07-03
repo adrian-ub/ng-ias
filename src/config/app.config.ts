@@ -7,6 +7,8 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 
+import { provideMarkdown } from 'ngx-markdown';
+
 import { provideRecipe } from '@infraestructure/driven-adapter/recipe';
 import { provideIngredient } from '@infraestructure/driven-adapter/ingredient';
 import { provideCategory } from '@infraestructure/driven-adapter/category';
@@ -25,5 +27,6 @@ export const appConfig: ApplicationConfig = {
     provideRecipe(),
     provideIngredient(),
     provideCategory(),
+    provideMarkdown(),
   ],
 };

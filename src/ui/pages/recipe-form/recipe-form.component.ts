@@ -31,7 +31,7 @@ import { toast } from 'ngx-sonner';
   templateUrl: 'recipe-form.component.html',
   host: {
     class:
-      'border-border overflow-hidden rounded-lg border block p-2 sm:p-4 pb-16 mt-6',
+      'container border-border overflow-hidden rounded-lg border block p-2 sm:p-4 pb-16 mt-6',
   },
   providers: [provideIcons({ lucideTrash })],
   imports: [

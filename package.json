@@ -48,6 +48,7 @@
     "clsx": "^1.2.1",
     "dexie": "^4.0.7",
     "embla-carousel-angular": "^14.0.0",
+    "ngx-markdown": "^17.2.1",
     "ngx-scrollbar": "^13.0.1",
     "ngx-sonner": "^1.0.0",
     "rxjs": "~7.8.0",

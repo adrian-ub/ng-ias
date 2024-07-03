@@ -11,4 +11,5 @@ export abstract class RecipeGateway {
   ): Observable<{ data: RecipeModel[] }>;
   abstract getRecipes(): Observable<RecipeModel[]>;
   abstract markFavorite(id: number): Observable<RecipeModel[]>;
+  abstract getRecipe(id: number): Observable<RecipeModel>;
 }

@@ -35,4 +35,10 @@ export class RecipeAdapter implements RecipeGateway {
       })
       .pipe(map((data) => data.data));
   }
+
+  getRecipe(id: number): Observable<RecipeModel> {
+    return this.httpClient
+      .get<{ data: RecipeModel }>('/recipes/' + id)
+      .pipe(map((data) => data.data));
+  }
 }
